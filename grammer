@@ -1,0 +1,23 @@
+program ::= {statement}
+statement ::= "PRINT" (expression | string) nl -> done
+    | "IF" comparison "THEN" nl {statement} "ENDIF" nl
+    | "WHILE" comparison "REPEAT" nl {statement} "ENDWHILE" nl
+    | "LABEL" ident nl
+    | "GOTO" ident nl
+    | "LET" ident "=" expression nl
+    | "INPUT" ident nl
+comparison ::= expression (("==" | "!=" | ">" | ">=" | "<" | "<=") expression)+
+expression ::= term {( "-" | "+" ) term}
+term ::= unary {( "/" | "*" ) unary}
+unary ::= ["+" | "-"] primary
+primary ::= number | ident
+nl ::= '\n'+
+
+
+-- My notes:
+  unary = signed number
+  term = mul (or) div of >= 2 unaries
+  expression = sum of 2 or more unary
+  comparision = comp b/w 2 expressoins
+  statement -> mentioned above
+-- End of notes
